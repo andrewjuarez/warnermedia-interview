@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const filmSearchController = require('../controllers/film.search');
-const filmDetailsController = require('../controllers/film.details');
+const filmSearchValidator = require('../validators/film.search.validator');
+const filmDetailsValidator = require('../validators/film.details.validator');
 
-router.get('/api/film/search', filmSearchController);
-router.get('/api/film/details', filmDetailsController);
+const filmSearchController = require('../controllers/film.search.controller');
+const filmDetailsController = require('../controllers/film.details.controller');
+
+router.get('/api/film/search', filmSearchValidator, filmSearchController);
+router.get('/api/film/details/:movieId', filmDetailsValidator, filmDetailsController);
 
 module.exports = router;

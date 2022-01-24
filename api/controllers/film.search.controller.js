@@ -2,10 +2,6 @@ const axios = require('../axios');
 
 module.exports = async function filmSearchController(req, res) {
     try {
-        if (!req.query.title) {
-            res.status(400).send({ success: false, message: 'You must specify a search query.' });
-        }
-
         var apiResponse = await axios.get('https://movies-tvshows-data-imdb.p.rapidapi.com/',
             { params: { type: 'get-movies-by-title', title: req.query.title } });
         console.log(apiResponse.data)
