@@ -1,13 +1,11 @@
 import React from 'react';
 import {
     Container,
-    Button,
-    Form,
-    FormControl,
     Nav,
     Navbar,
     NavDropdown,
 } from 'react-bootstrap';
+import SearchBar from './SearchBar';
 
 export default function CustomNavbar() {
     return (
@@ -35,15 +33,7 @@ export default function CustomNavbar() {
                             Link
                         </Nav.Link>
                     </Nav>
-                    <Form className='d-flex'>
-                        <FormControl
-                            type='search'
-                            placeholder='Search'
-                            className='me-2'
-                            aria-label='Search'
-                        />
-                        <Button variant='outline-success'>Search</Button>
-                    </Form>
+                    <SearchBar />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
