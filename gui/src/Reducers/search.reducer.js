@@ -6,8 +6,12 @@ const INITIAL_STATE = {
 
 const SearchReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        
-
+        case 'MOVIE_SEARCH_REQUEST':
+            return { ...state, loading: true };
+        case 'MOVIE_SEARCH_RESULTS':
+            return { ...state, success: true, loading: false, results: action.results };
+        case 'MOVIE_SEARCH_ERROR':
+            return { ...state, success: false, loading: false, results: [] };
         default:
             return state;
     }
