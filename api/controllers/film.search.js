@@ -15,7 +15,10 @@ module.exports = async function filmSearchController(req, res) {
             throw new Error("API error");
         }
     } catch (error) {
-        console.error(error);
+        if (error?.response?.status === 403) {
+            res.status(500).send({ success: false, message: 'API key not found - check IMDB_KEY env variable.' })
+        }
+
         res.status(500).send({ success: false, message: 'Error' });
     }
 }
