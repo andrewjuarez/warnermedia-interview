@@ -6,7 +6,7 @@ import {
     Form,
     FormControl,
     Dropdown,
-    DropdownButton
+    DropdownButton,
 } from 'react-bootstrap';
 
 export default function SearchBar() {
@@ -46,9 +46,16 @@ export default function SearchBar() {
                 onChange={(e) => updateQuery(e.target.value)}
             />
             <DropdownButton onClick={searchNow} onSelect={(eventKey) => navigate(`/details/${eventKey}`)} align="end" title="Search" id="dropdown-menu-align-end">
-                {results.map(result => (
-                    <Dropdown.Item key={result.imdb_id} eventKey={result.imdb_id}>{result.year} | {result.title}</Dropdown.Item>
-                ))}
+                {(loading) ?
+                    <Dropdown.Item>
+                        Loading..
+                    </Dropdown.Item>
+                    
+                    :
+                    results.map(result => (
+                        <Dropdown.Item key={result.imdb_id} eventKey={result.imdb_id}>{result.year} | {result.title}</Dropdown.Item>
+                    ))
+                }
             </DropdownButton>
         </Form>
     );

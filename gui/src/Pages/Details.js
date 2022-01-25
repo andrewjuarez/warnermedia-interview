@@ -17,20 +17,20 @@ export default function DetailsPage() {
         dispatch(getMovieDetails(params.movieId));
     }, [params.movieId])
 
-    if (success) {
+    if (success && !loading) {
         return (
             <div>
-                <h1>{details.title}</h1>
+                <h1>{details?.title}</h1>
                 <div>
-                    {details.year} | {details.rated} | {Math.floor(details.runtime / 60)}h {details.runtime % 60}m
+                    {details?.year} | {details?.rated} | {Math.floor(details?.runtime / 60)}h {details?.runtime % 60}m
                 </div>
-                <YouTubeFrame embedId={details.youtube_trailer_key} />
+                <YouTubeFrame embedId={details?.youtube_trailer_key} />
                 <div>
                     {details.genres.map((genre, index) => {
                         return <Badge key={index} pill bg="warning" text="dark">{genre}</Badge>
                     })}
                 </div>
-                <p>{details.description}</p>
+                <p>{details?.description}</p>
 
                 <div>⭐ {details.imdb_rating}/10</div>
 
@@ -39,7 +39,7 @@ export default function DetailsPage() {
                         <Accordion.Header>Directors</Accordion.Header>
                         <Accordion.Body>
                             <ul>
-                                {details.directors.map(director => (<li>{director}</li>))}
+                                {details?.directors?.map((director, i) => (<li key={i}>{director}</li>))}
                             </ul>
                         </Accordion.Body>
                     </Accordion.Item>
@@ -47,7 +47,7 @@ export default function DetailsPage() {
                         <Accordion.Header>Cast</Accordion.Header>
                         <Accordion.Body>
                             <ul>
-                                {details.stars.map(star => (<li>{star}</li>))}
+                                {details?.stars?.map((star, i) => (<li key={i}>{star}</li>))}
                             </ul>
                         </Accordion.Body>
                     </Accordion.Item>
@@ -55,14 +55,14 @@ export default function DetailsPage() {
                         <Accordion.Header>Globalization</Accordion.Header>
                         <Accordion.Body>
                             <ul>
-                                {details.countries.map(country => (<li>{country}</li>))}
+                                {details?.countries?.map((country, i) => (<li key={i}>{country}</li>))}
                             </ul>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </div>
         );
-    } else if(loading) {
+    } else if (loading) {
         return <p>Loading</p>
     } else {
         return <p>Error</p>
