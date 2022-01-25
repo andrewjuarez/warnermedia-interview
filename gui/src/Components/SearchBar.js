@@ -29,7 +29,7 @@ export default function SearchBar() {
      * @description - Check if new query is detected, fetch results from API, if not display previous search results
      */
     const searchNow = () => {
-        if (changeDetected) {
+        if (changeDetected && query) {
             setChangeDetected(false);
             dispatch(searchMovies(query));
         }
